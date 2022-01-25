@@ -1,22 +1,23 @@
 """
 Snake Eater
-Made with PyGame
+Made with 114514Blyat
 """
 
 import pygame, sys, time, random
 
 
 # Difficulty settings
-# Easy      ->  10
-# Medium    ->  25
-# Hard      ->  40
-# Harder    ->  60
-# Impossible->  120
-difficulty = 25
+# Easy      ->  30
+# Medium    ->  60
+# Hard      ->  90
+# Harder    ->  120
+# Impossible->  180
+difficulty = 30
+
 
 # Window size
-frame_size_x = 720
-frame_size_y = 480
+frame_size_x = 1600
+frame_size_y = 900
 
 # Checks for errors encountered
 check_errors = pygame.init()
@@ -40,7 +41,7 @@ white = pygame.Color(255, 255, 255)
 red = pygame.Color(255, 0, 0)
 green = pygame.Color(0, 255, 0)
 blue = pygame.Color(0, 0, 255)
-
+yellow = pygame.Color(255, 255, 0)
 
 # FPS (frames per second) controller
 fps_controller = pygame.time.Clock()
@@ -61,13 +62,13 @@ score = 0
 
 # Game Over
 def game_over():
-    my_font = pygame.font.SysFont('times new roman', 90)
-    game_over_surface = my_font.render('YOU DIED', True, red)
+    my_font = pygame.font.SysFont('Ariel', 85)
+    game_over_surface = my_font.render('Never Gonna Give You Up, Never Gonna Let You Down', True, yellow)
     game_over_rect = game_over_surface.get_rect()
     game_over_rect.midtop = (frame_size_x/2, frame_size_y/4)
-    game_window.fill(black)
+    game_window.fill(blue)
     game_window.blit(game_over_surface, game_over_rect)
-    show_score(0, red, 'times', 20)
+    show_score(0, white, 'Ariel', 80)
     pygame.display.flip()
     time.sleep(3)
     pygame.quit()
@@ -131,10 +132,10 @@ while True:
     # Snake body growing mechanism
     snake_body.insert(0, list(snake_pos))
     if snake_pos[0] == food_pos[0] and snake_pos[1] == food_pos[1]:
-        score += 1
+        score += 100000000
         food_spawn = False
     else:
-        snake_body.pop()
+        snake_body.pop(2)
 
     # Spawning food on the screen
     if not food_spawn:
@@ -142,7 +143,7 @@ while True:
     food_spawn = True
 
     # GFX
-    game_window.fill(black)
+    game_window.fill(blue)
     for pos in snake_body:
         # Snake body
         # .draw.rect(play_surface, color, xy-coordinate)
@@ -163,7 +164,7 @@ while True:
         if snake_pos[0] == block[0] and snake_pos[1] == block[1]:
             game_over()
 
-    show_score(1, white, 'consolas', 20)
+    show_score(1, yellow, 'Ariel', 50)
     # Refresh game screen
     pygame.display.update()
     # Refresh rate
